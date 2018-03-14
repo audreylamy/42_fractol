@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 13:08:52 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/13 18:28:04 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/14 10:32:43 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	ft_transformation(t_env *t, int max_iter, int x, int y)
 	int			i;
 
 	t->f.c_re = t->f.xmin + ((t->f.xmax -
-				t->f.xmin) / WINDOW_L * x) + t->f.moveX;
+				t->f.xmin) / WINDOW_L * x) + t->f.move_x;
 	t->f.c_im = t->f.ymin + ((t->f.ymax -
-				t->f.ymin) / WINDOW_H * y) + t->f.moveY;
+				t->f.ymin) / WINDOW_H * y) + t->f.move_y;
 	init_burnship(t);
 	i = 0;
 	while (i < max_iter)
@@ -42,8 +42,8 @@ static void	ft_transformation(t_env *t, int max_iter, int x, int y)
 			break ;
 		i++;
 	}
-	rgb = HSVtoRGB(i % 256 + t->c, 1, i < max_iter);
-	fill_pixel(t, x, y, createRGBA(rgb.r, rgb.g, rgb.b));
+	rgb = hsv_to_rgb(i % 256 + t->c, 1, i < max_iter);
+	fill_pixel(t, x, y, create_rgb(rgb.r, rgb.g, rgb.b));
 }
 
 void		ft_burn_ship(t_env *tmp)

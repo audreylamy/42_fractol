@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:21:25 by Deydou            #+#    #+#             */
-/*   Updated: 2018/03/13 18:27:46 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/14 10:33:08 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	ft_transformation(t_env *t, int max_iter, int x, int y)
 	int			i;
 
 	t->f.c_re = t->f.xmin + ((t->f.xmax -
-				t->f.xmin) / WINDOW_L * x) + t->f.moveX;
+				t->f.xmin) / WINDOW_L * x) + t->f.move_x;
 	t->f.c_im = t->f.ymin + ((t->f.ymax -
-				t->f.ymin) / WINDOW_H * y) + t->f.moveY;
+				t->f.ymin) / WINDOW_H * y) + t->f.move_y;
 	init_mandelbrot(t);
 	i = 0;
 	while (i < max_iter)
@@ -42,8 +42,8 @@ static void	ft_transformation(t_env *t, int max_iter, int x, int y)
 			break ;
 		i++;
 	}
-	rgb = HSVtoRGB(i % 256 + t->c, 1, i < max_iter);
-	fill_pixel(t, x, y, createRGBA(rgb.r, rgb.g, rgb.b));
+	rgb = hsv_to_rgb(i % 256 + t->c, 1, i < max_iter);
+	fill_pixel(t, x, y, create_rgb(rgb.r, rgb.g, rgb.b));
 }
 
 void		ft_create_mandelbrot(t_env *tmp)

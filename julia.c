@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 16:33:52 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/13 18:34:28 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/14 10:41:51 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	ft_transformation(t_env *tmp, int max_iter, int x, int y)
 	t_colorrgb	rgb;
 
 	tmp->f.n_re = tmp->f.xmin + ((tmp->f.xmax -
-	tmp->f.xmin) / WINDOW_L * x) + tmp->f.moveX;
+	tmp->f.xmin) / WINDOW_L * x) + tmp->f.move_x;
 	tmp->f.n_im = tmp->f.ymin + ((tmp->f.ymax -
-	tmp->f.ymin) / WINDOW_H * y) + tmp->f.moveY;
+	tmp->f.ymin) / WINDOW_H * y) + tmp->f.move_y;
 	i = 0;
 	while (i < max_iter)
 	{
@@ -50,8 +50,8 @@ static void	ft_transformation(t_env *tmp, int max_iter, int x, int y)
 			break ;
 		i++;
 	}
-	rgb = HSVtoRGB(i % 256 + tmp->c, 1, i < max_iter);
-	fill_pixel(tmp, x, y, createRGBA(rgb.r, rgb.g, rgb.b));
+	rgb = hsv_to_rgb(i % 256 + tmp->c, 1, i < max_iter);
+	fill_pixel(tmp, x, y, create_rgb(rgb.r, rgb.g, rgb.b));
 }
 
 void		ft_create_julia(t_env *tmp)
@@ -60,7 +60,7 @@ void		ft_create_julia(t_env *tmp)
 	int			x;
 	int			max_iter;
 
-	max_iter = 200 + tmp->f.iter;
+	max_iter = 300 + tmp->f.iter;
 	if (max_iter == 50)
 		tmp->f.iter = 0;
 	x = 0;

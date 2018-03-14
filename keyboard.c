@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:46:20 by Deydou            #+#    #+#             */
-/*   Updated: 2018/03/13 18:49:24 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/14 10:38:10 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void		ft_redraw_image(t_env *tmp)
 static void	ft_move(t_env *tmp, int keycode)
 {
 	if (keycode == LEFT)
-		tmp->f.moveX += 0.1;
+		tmp->f.move_x += 0.1;
 	else if (keycode == RIGHT)
-		tmp->f.moveX -= 0.1;
+		tmp->f.move_x -= 0.1;
 	else if (keycode == UP)
-		tmp->f.moveY += 0.1;
+		tmp->f.move_y += 0.1;
 	else if (keycode == DOWN)
-		tmp->f.moveY -= 0.1;
+		tmp->f.move_y -= 0.1;
 	else if (keycode == ITER_UP)
 		tmp->f.iter += 50;
 	else if (keycode == ITER_DOWN)

@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 13:29:37 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/13 18:29:52 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/14 10:18:24 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static void	ft_transformation(t_env *t, int random, int zoom)
 		t->barn.x1 = 0.85 * t->barn.x0 + 0.04 * t->barn.y0;
 		t->barn.y1 = -0.04 * t->barn.x0 + 0.85 * t->barn.y0 + 1.6;
 	}
-	rgb = HSVtoRGB(323 + t->c, 1 + t->c, 0.46 + t->c);
+	rgb = hsv_to_rgb(323 + t->c, 1 + t->c, 0.46 + t->c);
 	fill_pixel(t, (zoom + t->barn.zoom_b) * t->barn.x1 + WINDOW_L /
-	2.0, (zoom + t->barn.zoom_b) * t->barn.y1, createRGBA(rgb.r, rgb.g, rgb.b));
+	2.0, (zoom + t->barn.zoom_b) * t->barn.y1, create_rgb(rgb.r, rgb.g, rgb.b));
 }
 
 void		ft_create_barnsleyfern(t_env *tmp)

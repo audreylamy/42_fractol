@@ -6,7 +6,7 @@
 #    By: alamy <alamy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/11 18:07:22 by lesanche          #+#    #+#              #
-#    Updated: 2018/03/08 17:21:36 by alamy            ###   ########.fr        #
+#    Updated: 2018/03/14 10:20:29 by alamy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRC = \
 				burn_ship.c \
 				barnsley.c \
 				tricorn.c \
-				carpet_serpinski.c \
 				color.c \
 				keyboard.c \
 				write_string.c \
