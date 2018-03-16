@@ -6,14 +6,14 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:49:43 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/14 10:35:31 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 17:12:33 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define WINDOW_L 1500
-# define WINDOW_H 1200
+# define WINDOW_L 1200
+# define WINDOW_H 800
 # define PI 3.14159265359
 
 # include "minilibx/mlx.h"
@@ -27,8 +27,6 @@
 # include "libft/libft.h"
 # include <pthread.h>
 
-# define PTHREAD_MUTEX_INITIALIZER {_PTHREAD_MUTEX_SIG_init, {0}}
-
 # define EXIT 53
 # define STOP 49
 # define RIGHT 124
@@ -37,8 +35,6 @@
 # define DOWN 125
 # define ITER_UP 69
 # define ITER_DOWN 78
-# define COLOR_UP 36
-# define COLOR_DOWN 258
 # define CLIC_RIGHT 2
 # define CLIC_LEFT 1
 # define SCROLL_UP 5
@@ -46,8 +42,15 @@
 # define JULIA 83
 # define MANDELBROT 84
 # define BURNSHIP 85
-# define BARNSLEY 86
-# define TRICORN 87
+# define TRICORN 86
+
+# define COLOR_UP 36
+# define COLOR_DOWN 258
+# define COLOR_R 15
+# define COLOR_G 5
+# define COLOR_B 11
+
+# define MAX_ITER 82
 
 typedef struct	s_colorrgb
 {
@@ -86,11 +89,9 @@ typedef struct	s_img
 
 typedef struct	s_barn
 {
-	double		zoom_b;
-	double		x0;
-	double		y0;
-	double		x1;
-	double		y1;
+	double		move_r;
+	double		move_g;
+	double		move_b;
 }				t_barn;
 
 typedef struct	s_fractal
@@ -120,13 +121,8 @@ typedef struct	s_env
 	t_barn		barn;
 	t_fractal	f;
 	double		c;
+	int			max;
 }				t_env;
-
-typedef struct	s_thread
-{
-	int var;
-	pthread_mutex_t mutex;
-}				t_thread;
 
 int				main(int argc, char **argv);
 void			ft_create_image(t_env *tmp, char *str);
@@ -135,7 +131,7 @@ void			ft_fractal2(t_env *tmp, char *str);
 void			ft_redraw_image(t_env *tmp);
 void			fill_pixel(t_env *t, int x, int y, int color);
 int				create_rgb(int r, int g, int b);
-t_colorrgb		hsv_to_rgb(double r, double g, double b);
+t_colorrgb		hsv_to_rgb(t_env *tmp, double hue, double sat, double value);
 void			ft_create_string(t_env *t);
 
 /*
@@ -156,6 +152,5 @@ void			ft_create_julia(t_env *tmp);
 void			ft_create_mandelbrot(t_env *tmp);
 void			ft_burn_ship(t_env *tmp);
 void			ft_create_tricorn(t_env *tmp);
-void			ft_create_barnsleyfern(t_env *tmp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 17:23:18 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/14 10:45:17 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 17:12:04 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,87 +25,87 @@ int				create_rgb(int r, int g, int b)
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
-static void		init_color(t_color *color, double h)
+static void		init_color(t_color *color, double hue)
 {
 	color->r = 0;
 	color->g = 0;
 	color->b = 0;
-	while (h < 0)
+	while (hue < 0)
 	{
-		h += 360;
+		hue += 360;
 	}
-	while (h >= 360)
+	while (hue >= 360)
 	{
-		h -= 360;
+		hue -= 360;
 	}
 }
 
-static t_color	*ft_choose_color(t_color *color, double v, int i)
+static t_color	*ft_choose_color(t_color *color, double value, int i)
 {
 	if (i == 0)
 	{
-		color->r = v;
+		color->r = value;
 		color->g = color->t;
 		color->b = color->p;
 	}
 	else if (i == 1)
 	{
 		color->r = color->q;
-		color->g = v;
+		color->g = value;
 		color->b = color->p;
 	}
 	else if (i == 2)
 	{
 		color->r = color->p;
-		color->g = v;
+		color->g = value;
 		color->b = color->t;
 	}
 	else if (i == 3)
 	{
 		color->r = color->p;
 		color->g = color->q;
-		color->b = v;
+		color->b = value;
 	}
 	else if (i == 4)
 	{
 		color->r = color->t;
 		color->g = color->p;
-		color->b = v;
+		color->b = value;
 	}
 	else
 	{
-		color->r = v;
+		color->r = value;
 		color->g = color->p;
 		color->b = color->q;
 	}
 	return (color);
 }
 
-t_colorrgb		hsv_to_rgb(double h, double s, double v)
+t_colorrgb		hsv_to_rgb(t_env *tmp, double hue, double sat, double value)
 {
 	t_colorrgb	rgb;
 	t_color		color;
 	int			i;
 
-	init_color(&color, h);
-	if (s <= 0)
+	init_color(&color, hue);
+	if (sat <= 0)
 	{
-		color.r = v;
-		color.g = v;
-		color.b = v;
+		color.r = value;
+		color.g = value;
+		color.b = value;
 	}
 	else
 	{
-		h = h / 60;
-		i = (int)floor(h);
-		color.f = h - i;
-		color.p = v * (1.0 - s);
-		color.q = v * (1.0 - (s * color.f));
-		color.t = v * (1.0 - (s * (1.0 - color.f)));
-		ft_choose_color(&color, v, i);
+		hue = hue / 60;
+		i = (int)floor(hue);
+		color.f = hue - i;
+		color.p = value * (1.0 - sat);
+		color.q = value * (1.0 - (sat * color.f));
+		color.t = value * (1.0 - (sat * (1.0 - color.f)));
+		ft_choose_color(&color, value, i);
 	}
-	rgb.r = color.r * 255;
-	rgb.g = color.g * 255;
-	rgb.b = color.b * 255;
+	rgb.r = color.r * 255 + tmp->barn.move_r;
+	rgb.g = color.g * 255 + tmp->barn.move_g;
+	rgb.b = color.b * 255 + tmp->barn.move_b;
 	return (rgb);
 }

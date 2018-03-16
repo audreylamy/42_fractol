@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:21:25 by Deydou            #+#    #+#             */
-/*   Updated: 2018/03/14 10:33:08 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 16:21:13 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_transformation(t_env *t, int max_iter, int x, int y)
 			break ;
 		i++;
 	}
-	rgb = hsv_to_rgb(i % 256 + t->c, 1, i < max_iter);
+	rgb = hsv_to_rgb(t, i % 256 + t->c, 1, i + t->max);
 	fill_pixel(t, x, y, create_rgb(rgb.r, rgb.g, rgb.b));
 }
 

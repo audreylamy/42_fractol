@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 14:59:39 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/13 18:54:35 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 16:09:40 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,10 @@ int		my_mouse_funct(int button, int x, int y, t_env *tmp)
 
 int		my_motion_hook(int x, int y, t_env *tmp)
 {
-	int largeur;
-
-	y = 0;
-	largeur = WINDOW_L / 2;
 	if (x >= 0 && y >= 0 && x <= WINDOW_L && y <= WINDOW_H && tmp->f.stop != 1)
 	{
-		if (x > 0 && x < largeur)
-		{
-			tmp->f.c_re -= 0.05;
-			tmp->f.c_im -= 0.05;
-		}
-		else if (x > largeur && x < WINDOW_L)
-		{
-			tmp->f.c_re += 0.05;
-			tmp->f.c_im += 0.05;
-		}
+		tmp->f.c_re = (double)x / WINDOW_L * 4 - 2;
+		tmp->f.c_im = (double)y / WINDOW_H * 4 - 2;
 	}
 	ft_redraw_image(tmp);
 	return (0);

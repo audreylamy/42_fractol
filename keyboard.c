@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:46:20 by Deydou            #+#    #+#             */
-/*   Updated: 2018/03/14 10:38:10 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 16:42:40 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void		ft_redraw_image(t_env *tmp)
 		ft_create_mandelbrot(tmp);
 	else if (tmp->num_f == 3)
 		ft_burn_ship(tmp);
-	else if (tmp->num_f == 4)
-		ft_create_barnsleyfern(tmp);
 	else if (tmp->num_f == 5)
 		ft_create_tricorn(tmp);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img_ptr, 0, 0);
@@ -36,21 +34,17 @@ void		ft_redraw_image(t_env *tmp)
 static void	ft_move(t_env *tmp, int keycode)
 {
 	if (keycode == LEFT)
-		tmp->f.move_x += 0.1;
+		tmp->f.move_x += 0.01;
 	else if (keycode == RIGHT)
-		tmp->f.move_x -= 0.1;
+		tmp->f.move_x -= 0.01;
 	else if (keycode == UP)
-		tmp->f.move_y += 0.1;
+		tmp->f.move_y += 0.01;
 	else if (keycode == DOWN)
-		tmp->f.move_y -= 0.1;
+		tmp->f.move_y -= 0.01;
 	else if (keycode == ITER_UP)
 		tmp->f.iter += 50;
 	else if (keycode == ITER_DOWN)
 		tmp->f.iter -= 50;
-	else if (keycode == COLOR_UP)
-		tmp->c += 5;
-	else if (keycode == COLOR_DOWN)
-		tmp->c -= 5;
 	else if (keycode == STOP)
 	{
 		if (tmp->f.stop == 0)
@@ -94,16 +88,18 @@ int			my_key_funct(int keycode, t_env *tmp)
 	}
 	ft_move(tmp, keycode);
 	ft_choose_fractal(tmp, keycode);
-	if (keycode == BARNSLEY)
-	{
-		init_fractal(tmp);
-		tmp->num_f = 4;
-	}
-	else if (keycode == 8)
-	{
-		tmp->barn.zoom_b += 5;
-		tmp->f.iter += 500000;
-	}
+	if (keycode == COLOR_R)
+		tmp->barn.move_r += 20;
+	else if (keycode == COLOR_G)
+		tmp->barn.move_g += 20;
+	else if (keycode == COLOR_B)
+		tmp->barn.move_b += 20;
+	else if (keycode == COLOR_UP)
+		tmp->c += 5;
+	else if (keycode == COLOR_DOWN)
+		tmp->c -= 5;
+	else if (keycode == MAX_ITER)
+		tmp->max -= 50;
 	ft_redraw_image(tmp);
 	return (0);
 }

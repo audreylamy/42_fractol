@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 14:09:40 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/13 17:08:14 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 17:09:12 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 void	ft_fractal2(t_env *tmp, char *str)
 {
-	if (ft_strcmp(str, "barnsley") == 0)
-	{
-		tmp->num_f = 4;
-		ft_create_barnsleyfern(tmp);
-	}
-	else if (ft_strcmp(str, "tricorn") == 0)
+	if (ft_strcmp(str, "tricorn") == 0)
 	{
 		tmp->num_f = 5;
 		ft_create_tricorn(tmp);
 	}
 	else
 	{
-		ft_putstr(
-			"usage:./fractol [julia|mandelbrot|burnship|tricorn|barnsley]");
+		ft_putstr("usage:./fractol [julia|mandelbrot|burnship|tricorn]");
 		exit(0);
 	}
 }
@@ -71,8 +65,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr(
-			"usage:./fractol [julia|mandelbrot|burnship|tricorn|barnsley]");
+		ft_putstr("usage:./fractol [julia|mandelbrot|burnship|tricorn]");
 		exit(0);
 	}
 	else

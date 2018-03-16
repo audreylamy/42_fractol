@@ -6,7 +6,7 @@
 /*   By: alamy <alamy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 16:33:52 by alamy             #+#    #+#             */
-/*   Updated: 2018/03/14 10:41:51 by alamy            ###   ########.fr       */
+/*   Updated: 2018/03/16 16:35:06 by alamy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void		init_fractal(t_env *tmp)
 	tmp->f.stop = 0;
 	tmp->f.iter = 0;
 	tmp->c = 0;
+	tmp->barn.move_r = 0;
+	tmp->barn.move_g = 0;
+	tmp->barn.move_b = 0;
 }
 
 void		init_julia(t_env *tmp)
@@ -50,7 +53,7 @@ static void	ft_transformation(t_env *tmp, int max_iter, int x, int y)
 			break ;
 		i++;
 	}
-	rgb = hsv_to_rgb(i % 256 + tmp->c, 1, i < max_iter);
+	rgb = hsv_to_rgb(tmp, i % 256 + tmp->c, 1, i < max_iter);
 	fill_pixel(tmp, x, y, create_rgb(rgb.r, rgb.g, rgb.b));
 }
 
