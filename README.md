@@ -4,12 +4,12 @@
 ## Usage  
 First, git clone in your terminal using command :  
 
-➙ git clone https://github.com/audreylamy/42_fractol [name]  
+➙ **git clone** https://github.com/audreylamy/42_fractol **[name]** 
 
 Run makefile to compile using command:  
 
-➙ make  
+➙ **make** 
 
 Run executable using command:  
 
-➙ ./fractol [mandelbrot/julia/burningship]  
+➙ **./fractol [mandelbrot/julia/burningship]**
